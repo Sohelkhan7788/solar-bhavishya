@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import API from "../api"; // ✅ FIXED
+import API from "../api";
 import toast from "react-hot-toast";
 import "./Sections.css";
 
@@ -20,26 +20,12 @@ export function Subsidy() {
           <h2 className="section-title">
             BHARAT SARKAR KI <span className="gold">SUBSIDY</span>
           </h2>
-          <div className="title-line"></div>
         </div>
-        <div className="subsidy-layout">
-          <div className="subsidy-card">
-            <div style={{ fontSize: "40px", marginBottom: "12px" }}>🏛️</div>
-            <span className="subsidy-label">Bharat Sarkar ki Ore Se</span>
-            <div className="subsidy-amount">₹78,000</div>
-            <p className="subsidy-sub">
-              Tak Ki Sarkari Subsidy* Solar Rooftop Ke Liye
-            </p>
-          </div>
-          <ul className="subsidy-list">
-            {points.map((p, i) => (
-              <li key={i}>
-                <span className="check-icon">✓</span>
-                <span>{p}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <ul>
+          {points.map((p, i) => (
+            <li key={i}>✓ {p}</li>
+          ))}
+        </ul>
       </div>
     </section>
   );
@@ -47,136 +33,16 @@ export function Subsidy() {
 
 // ===== PRAKRIYA =====
 export function Prakriya() {
-  const steps = [
-    {
-      n: 1,
-      title: "Free Survey",
-      desc: "Hamari team chhat ka muft nirikshan karti hai.",
-    },
-    {
-      n: 2,
-      title: "Custom Quote",
-      desc: "Budget ke anusar best solar package taiyar kiya jaata hai.",
-    },
-    {
-      n: 3,
-      title: "Subsidy Process",
-      desc: "Sabhi government forms aur avedan hamari zimmmedari.",
-    },
-    {
-      n: 4,
-      title: "Installation",
-      desc: "1–2 din mein professional installation.",
-    },
-    {
-      n: 5,
-      title: "Free Bijli ☀️",
-      desc: "25 saal tak free bijli aur net metering ka fayda.",
-    },
-  ];
-
+  const steps = ["Free Survey", "Quote", "Subsidy", "Install", "Free Bijli"];
   return (
     <section className="section" id="prakriya">
       <div className="container">
-        <div className="section-header">
-          <span className="section-tag">PRAKRIYA</span>
-          <h2 className="section-title">
-            KAISA KAAM KARTA HAI <span className="gold">HAMARA SYSTEM</span>
-          </h2>
-          <div className="title-line"></div>
-        </div>
-        <div className="steps-row">
-          {steps.map((s, i) => (
-            <React.Fragment key={i}>
-              <div className="step-item">
-                <div className="step-circle">{s.n}</div>
-                <div className="step-title">{s.title}</div>
-                <p className="step-desc">{s.desc}</p>
-              </div>
-              {i < steps.length - 1 && <div className="step-arrow">→</div>}
-            </React.Fragment>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ===== CONTACT (FIXED API CALL) =====
-export function Contact() {
-  const [form, setForm] = useState({
-    naam: "",
-    mobile: "",
-    sheher: "",
-    zaroorat: "",
-    sandesh: "",
-  });
-  const [loading, setLoading] = useState(false);
-
-  const handleChange = (e) =>
-    setForm({ ...form, [e.target.name]: e.target.value });
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (!form.naam || !form.mobile || !form.sheher) {
-      return toast.error("Naam, mobile aur sheher zaroori hai");
-    }
-
-    if (!/^[6-9]\d{9}$/.test(form.mobile)) {
-      return toast.error("Valid 10 digit mobile number daalo");
-    }
-
-    setLoading(true);
-
-    try {
-      await API.post("/api/leads", form); // ✅ FIXED
-      toast.success("🎉 Aapka request mil gaya! Jald sampark karenge.");
-      setForm({ naam: "", mobile: "", sheher: "", zaroorat: "", sandesh: "" });
-    } catch (err) {
-      toast.error(
-        err.response?.data?.message || "Kuch gadbad ho gayi, dobara try karein",
-      );
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  return (
-    <section className="section" id="contact">
-      <div className="container">
-        <div style={{ textAlign: "center", marginBottom: "40px" }}>
-          <span className="section-tag">SAMPARK KAREIN</span>
-          <h2 className="section-title">
-            ABHI <span className="gold">BAAT KAREIN</span>
-          </h2>
-          <div className="title-line"></div>
-        </div>
-
-        <form onSubmit={handleSubmit}>
-          <input
-            name="naam"
-            value={form.naam}
-            onChange={handleChange}
-            placeholder="Naam"
-          />
-          <input
-            name="mobile"
-            value={form.mobile}
-            onChange={handleChange}
-            placeholder="Mobile"
-          />
-          <input
-            name="sheher"
-            value={form.sheher}
-            onChange={handleChange}
-            placeholder="Sheher"
-          />
-
-          <button type="submit" disabled={loading}>
-            {loading ? "Sending..." : "Submit"}
-          </button>
-        </form>
+        <h2>Process</h2>
+        {steps.map((s, i) => (
+          <p key={i}>
+            {i + 1}. {s}
+          </p>
+        ))}
       </div>
     </section>
   );
@@ -187,28 +53,70 @@ export function KyonChunein() {
   const points = [
     "5+ saal ka experience",
     "500+ installations Rajasthan me",
-    "Best quality panels & inverter",
+    "Best quality panels",
     "Complete subsidy support",
-    "After-sales service guarantee",
   ];
-
   return (
     <section className="section" id="kyonchunein">
       <div className="container">
-        <div className="section-header">
-          <span className="section-tag">KYON CHUNEIN</span>
-          <h2 className="section-title">
-            KYON CHUNE <span className="gold">SOLAR BHAVISHYA</span>
-          </h2>
-          <div className="title-line"></div>
-        </div>
-
+        <h2>Kyon Chunein</h2>
         <ul>
           {points.map((p, i) => (
-            <li key={i}>✅ {p}</li>
+            <li key={i}>✔ {p}</li>
           ))}
         </ul>
       </div>
+    </section>
+  );
+}
+
+// 🔥 ===== ADD THIS (MISSING FIX) =====
+export function SevaKshetra() {
+  const cities = ["Jaipur", "Jodhpur", "Udaipur", "Kota", "Ajmer", "Bikaner"];
+
+  return (
+    <section className="section" id="seva">
+      <div className="container">
+        <h2>Seva Kshetra</h2>
+        <ul>
+          {cities.map((city, i) => (
+            <li key={i}>📍 {city}</li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+}
+
+// ===== CONTACT =====
+export function Contact() {
+  const [form, setForm] = useState({
+    naam: "",
+    mobile: "",
+    sheher: "",
+  });
+
+  const handleChange = (e) =>
+    setForm({ ...form, [e.target.name]: e.target.value });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await API.post("/api/leads", form);
+      toast.success("Submitted!");
+    } catch {
+      toast.error("Error");
+    }
+  };
+
+  return (
+    <section className="section">
+      <form onSubmit={handleSubmit}>
+        <input name="naam" onChange={handleChange} placeholder="Naam" />
+        <input name="mobile" onChange={handleChange} placeholder="Mobile" />
+        <input name="sheher" onChange={handleChange} placeholder="Sheher" />
+        <button type="submit">Submit</button>
+      </form>
     </section>
   );
 }
@@ -218,10 +126,10 @@ export function Footer() {
   const [clickCount, setClickCount] = useState(0);
 
   const handleClick = () => {
-    const newCount = clickCount + 1;
-    setClickCount(newCount);
+    const count = clickCount + 1;
+    setClickCount(count);
 
-    if (newCount === 3) {
+    if (count === 3) {
       window.location.href = "/admin/login";
       setClickCount(0);
     }
@@ -230,18 +138,9 @@ export function Footer() {
   };
 
   return (
-    <footer
-      className="footer"
-      onClick={handleClick}
-      style={{ cursor: "pointer" }}
-    >
-      <div className="footer-logo">
-        <span>SOLAR </span>
-        <span>BHAVISHYA</span>
-      </div>
-      <p className="footer-copy">
-        © 2026 Nasir Khan Solar Solutions. Poore Rajasthan Mein Seva.
-      </p>
+    <footer onClick={handleClick} style={{ cursor: "pointer" }}>
+      <h3>SOLAR BHAVISHYA</h3>
+      <p>© 2026</p>
     </footer>
   );
 }
