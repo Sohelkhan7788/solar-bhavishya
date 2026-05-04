@@ -6,21 +6,16 @@ import "./Sections.css";
 // ===== SUBSIDY =====
 export function Subsidy() {
   const points = [
-    "PM Surya Ghar Muft Bijli Yojana ke tahat 1 kW se 10 kW tak ke system par bhari subsidy uplabdh hai.",
-    "3 kW tak ke system par 40% aur 3–10 kW tak par 20% subsidy sarkar deti hai.",
-    "Subsidy seedha aapke bank account mein transfer ki jaati hai — bina kisi jhanjhat ke.",
-    "Hum poori paperwork aur sarkari formality aapke liye sambhalte hain.",
-    "*Subsidy sarkari niyamon v sharton ke anusar. Adhik jankari ke liye sampark karein.",
+    "PM Surya Ghar Muft Bijli Yojana ke tahat subsidy uplabdh hai.",
+    "3 kW tak 40% aur 3–10 kW tak 20% subsidy.",
+    "Direct bank transfer.",
+    "Complete paperwork support.",
   ];
+
   return (
     <section className="section" id="subsidy">
       <div className="container">
-        <div className="section-header">
-          <span className="section-tag">SARKARI SAHAYATA</span>
-          <h2 className="section-title">
-            BHARAT SARKAR KI <span className="gold">SUBSIDY</span>
-          </h2>
-        </div>
+        <h2>Government Subsidy</h2>
         <ul>
           {points.map((p, i) => (
             <li key={i}>✓ {p}</li>
@@ -50,39 +45,31 @@ export function Prakriya() {
 
 // ===== KYON CHUNEIN =====
 export function KyonChunein() {
-  const points = [
-    "5+ saal ka experience",
-    "500+ installations Rajasthan me",
-    "Best quality panels",
-    "Complete subsidy support",
-  ];
   return (
     <section className="section" id="kyonchunein">
       <div className="container">
         <h2>Kyon Chunein</h2>
         <ul>
-          {points.map((p, i) => (
-            <li key={i}>✔ {p}</li>
-          ))}
+          <li>✔ Experienced Team</li>
+          <li>✔ Quality Panels</li>
+          <li>✔ Best Pricing</li>
+          <li>✔ Full Support</li>
         </ul>
       </div>
     </section>
   );
 }
 
-// 🔥 ===== ADD THIS (MISSING FIX) =====
+// ===== SEVA KSHETRA =====
 export function SevaKshetra() {
-  const cities = ["Jaipur", "Jodhpur", "Udaipur", "Kota", "Ajmer", "Bikaner"];
-
+  const cities = ["Jaipur", "Jodhpur", "Udaipur", "Kota", "Ajmer"];
   return (
     <section className="section" id="seva">
       <div className="container">
         <h2>Seva Kshetra</h2>
-        <ul>
-          {cities.map((city, i) => (
-            <li key={i}>📍 {city}</li>
-          ))}
-        </ul>
+        {cities.map((c, i) => (
+          <span key={i}>{c} </span>
+        ))}
       </div>
     </section>
   );
@@ -110,7 +97,7 @@ export function Contact() {
   };
 
   return (
-    <section className="section">
+    <section className="section" id="contact">
       <form onSubmit={handleSubmit}>
         <input name="naam" onChange={handleChange} placeholder="Naam" />
         <input name="mobile" onChange={handleChange} placeholder="Mobile" />
@@ -123,22 +110,8 @@ export function Contact() {
 
 // ===== FOOTER =====
 export function Footer() {
-  const [clickCount, setClickCount] = useState(0);
-
-  const handleClick = () => {
-    const count = clickCount + 1;
-    setClickCount(count);
-
-    if (count === 3) {
-      window.location.href = "/admin/login";
-      setClickCount(0);
-    }
-
-    setTimeout(() => setClickCount(0), 2000);
-  };
-
   return (
-    <footer onClick={handleClick} style={{ cursor: "pointer" }}>
+    <footer style={{ textAlign: "center", padding: "20px" }}>
       <h3>SOLAR BHAVISHYA</h3>
       <p>© 2026</p>
     </footer>
