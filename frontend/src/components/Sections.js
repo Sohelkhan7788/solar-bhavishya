@@ -182,6 +182,37 @@ export function Contact() {
   );
 }
 
+// ===== KYON CHUNEIN =====
+export function KyonChunein() {
+  const points = [
+    "5+ saal ka experience",
+    "500+ installations Rajasthan me",
+    "Best quality panels & inverter",
+    "Complete subsidy support",
+    "After-sales service guarantee",
+  ];
+
+  return (
+    <section className="section" id="kyonchunein">
+      <div className="container">
+        <div className="section-header">
+          <span className="section-tag">KYON CHUNEIN</span>
+          <h2 className="section-title">
+            KYON CHUNE <span className="gold">SOLAR BHAVISHYA</span>
+          </h2>
+          <div className="title-line"></div>
+        </div>
+
+        <ul>
+          {points.map((p, i) => (
+            <li key={i}>✅ {p}</li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+}
+
 // ===== FOOTER =====
 export function Footer() {
   const [clickCount, setClickCount] = useState(0);
